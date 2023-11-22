@@ -1,4 +1,3 @@
-// routes/bookRoutes.ts
 import express, { Request, Response } from 'express';
 import { Book } from '../models/Book';
 

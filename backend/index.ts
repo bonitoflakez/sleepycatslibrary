@@ -1,4 +1,3 @@
-// index.js or app.js
 import express from "express";
 import cors from "cors";
 import { bookRoutes } from './routes/bookRoute';
@@ -7,17 +6,17 @@ import { connectDB } from "./config/dbConfig";
 const app = express();
 const port = 3001;
 
-// Middleware
+// middleware
 app.use(cors());
 app.use(express.json());
 
 // mongoDB connection
 connectDB();
 
-// Use book routes
+// book routes
 app.use('/books', bookRoutes);
 
-// Start the server
+// start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
