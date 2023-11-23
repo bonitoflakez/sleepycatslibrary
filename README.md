@@ -2,7 +2,7 @@
 
 > An efficient and user-friendly library management system for cataloging, updating, and managing book information.
 
-![Display of Project](/extras/image.png)
+![Display of Project](extras/image.png)
 
 ### Features
 
@@ -26,6 +26,7 @@ cd backend && bun install
 Make sure to add your MongoDB info in `.env` file
 
 Here's an Example of `.env`. Additionally, you can check [**example .env**](./backend/.env.example)
+
 ```txt
 DBUSER='your-db-user-name'
 DBPASS='your-db-user-pass'
