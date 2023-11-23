@@ -2,7 +2,7 @@
 
 > An efficient and user-friendly library management system for cataloging, updating, and managing book information.
 
-![Display of Project](./extras/image.png)
+![Display of Project](/extras/image.png)
 
 ### Features
 
