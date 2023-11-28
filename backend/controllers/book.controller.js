@@ -1,10 +1,6 @@
-import express, { Request, Response } from 'express';
-import { Book } from '../models/Book';
+import { Book } from "../models/Book.js";
 
-const router = express.Router();
-
-// Add a book
-router.post('/addBook', async (req: Request, res: Response) => {
+const addBook = async (req, res) => {
   try {
     const { bookId, bookName, author, publisher, purchaseLink } = req.body;
 
@@ -24,10 +20,9 @@ router.post('/addBook', async (req: Request, res: Response) => {
     console.error('Error adding a book:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+}
 
-// Read all books
-router.get('/getAllBooks', async (req: Request, res: Response) => {
+const getAllBooks = async (req, res) => {
   try {
     // fetch all books from database
     const allBooks = await Book.find();
@@ -36,10 +31,9 @@ router.get('/getAllBooks', async (req: Request, res: Response) => {
     console.error('Error getting all books:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+}
 
-// Delete a book
-router.delete('/deleteBook/:id', async (req: Request, res: Response) => {
+const deleteBook = async (req, res) => {
   try {
     const bookId = req.params.id;
 
@@ -55,10 +49,9 @@ router.delete('/deleteBook/:id', async (req: Request, res: Response) => {
     console.error('Error deleting a book:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+}
 
-// Update a book
-router.put('/updateBook/:id', async (req: Request, res: Response) => {
+const updateBook = async (req, res) => {
   try {
     const bookId = req.params.id;
     const { bookName, author, publisher, purchaseLink } = req.body;
@@ -84,6 +77,11 @@ router.put('/updateBook/:id', async (req: Request, res: Response) => {
     console.error('Error updating a book:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
-});
+}
 
-export { router as bookRoutes };
+export {
+  addBook,
+  getAllBooks,
+  deleteBook,
+  updateBook
+}
