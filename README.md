@@ -15,10 +15,10 @@
 
 ```bash
 # frontend
-cd frontend && bun install
+cd frontend && npm install
 
 # backend
-cd backend && bun install
+cd backend && npm install
 ```
 
 **IMPORTANT**
@@ -37,10 +37,8 @@ DBURI='db.something.mongodb.net'
 
 ```bash
 # frontend
-cd frontend && bun run start
+cd frontend && npm start
 
 # backend
-cd backend && bun run index.ts
+cd backend && node index.js
 ```
-
-> This project was created using [**Bun**](https://bun.sh) which is a fast all-in-one JavaScript runtime.
