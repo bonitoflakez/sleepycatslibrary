@@ -19,29 +19,26 @@ const BookApp = () => {
   };
 
   useEffect(() => {
-    // fetch all books from backend
     fetchBooks();
   }, []);
 
-  const handleFormSubmit = (formData) => {
-    if (selectedBook) {
-      // update existing book
-      axios.put(`http://localhost:3001/books/updateBook/${selectedBook._id}`, formData)
-        .then(response => console.log(response.data))
-        .catch(error => console.error(error));
-    } else {
-      // add a new book
-      axios.post('http://localhost:3001/books/addBook', formData)
-        .then(response => console.log(response.data))
-        .catch(error => console.error(error));
+  const handleFormSubmit = async (formData) => {
+    try {
+      if (selectedBook) {
+        await axios.put(`http://localhost:3001/books/updateBook/${selectedBook._id}`, formData);
+      } else {
+        await axios.post('http://localhost:3001/books/addBook', formData);
+      }
+
+      await fetchBooks();
+
+      setSelectedBook(null);
+      setModalOpen(false);
+    } catch (error) {
+      console.error(error);
     }
-
-    setSelectedBook(null);
-    setModalOpen(false);
-
-    // re-fetch data after adding or updating a book
-    fetchBooks();
   };
+
 
   const handleEditClick = (book) => {
     setSelectedBook(book);
@@ -49,13 +46,11 @@ const BookApp = () => {
   };
 
   const handleDeleteClick = (id) => {
-    // delete book
     axios.delete(`http://localhost:3001/books/deleteBook/${id}`)
       .then(response => console.log(response.data))
       .catch(error => console.error(error));
 
-    // re-fetch data after deleting a book
-    fetchBooks();
+    setBooks(prevBooks => prevBooks.filter(book => book._id !== id));
   };
 
   const handleModalClose = () => {
@@ -78,9 +73,6 @@ const BookApp = () => {
       >
         <BookForm onSubmit={handleFormSubmit} initialData={selectedBook} />
         <button onClick={handleModalClose} className="close-button absolute top-4 right-4 text-3xl cursor-pointer">&times;</button>
-        {/* <button onClick={handleModalClose} className="bg-red-500 text-white py-2 px-4 rounded-md mt-4">
-          Close
-        </button> */}
       </Modal>
       <BookList onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} books={books} />
     </div>
